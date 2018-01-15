@@ -60,4 +60,29 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 
 `dotnet new web -n Api`
 
+- 修改`Statup.cs`
+
+```c#
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddMvc();
+}
+```
+
+- 添加`Controller`
+
+```c#
+[Route("identity")]
+[Authorize]
+public class IdentityController : ControllerBase
+{
+    [HttpGet]
+    public IActionResult Get()
+    {
+        return new JsonResult(from c in User.Claims select new { c.Type, c.Value });
+    }
+}
+```
+
 ### Client
+
