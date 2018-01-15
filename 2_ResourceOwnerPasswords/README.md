@@ -58,3 +58,8 @@ services.AddIdentityServer()
         .AddInMemoryApiResources(Config.GetApiResources())
         .AddInMemoryClients(Config.GetClients());
 ```
+
+## Api
+
+`dotnet new web -n Api`
+`dotnet add package IdentityServer4.AccessTokenValidation --version 2.3.0`
