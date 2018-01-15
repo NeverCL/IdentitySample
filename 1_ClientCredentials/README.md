@@ -1,4 +1,4 @@
-# IdentityServer示例
+# IdentityServer示例（1）：ClientCredentials
 
 ## ClientCredentials
 
