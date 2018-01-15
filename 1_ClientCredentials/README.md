@@ -59,6 +59,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 ### Api
 
 `dotnet new web -n Api`
+`dotnet add package IdentityServer4.AccessTokenValidation --version 2.3.0`
 
 - 修改`Statup.cs`
 
@@ -66,6 +67,19 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 public void ConfigureServices(IServiceCollection services)
 {
     services.AddMvc();
+    services.AddAuthentication("Bearer")
+        .AddIdentityServerAuthentication(options=>{
+            options.Authority = "http://localhost:5000";
+            options.ApiName = "api1";
+            options.RequireHttpsMetadata = false;   // develop
+        });
+}
+
+public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+{
+    app.UseAuthentication();
+
+    app.UseMvc();
 }
 ```
 
@@ -86,3 +100,45 @@ public class IdentityController : ControllerBase
 
 ### Client
 
+`dotnet new console -n Client`
+`dotnet add package IdentityModel --version 3.0.0`
+
+```c#
+private static async Task MainAsync()
+{
+    // discover endpoints from metadata
+    var disco = await DiscoveryClient.GetAsync("http://localhost:5000");
+    if (disco.IsError)
+    {
+        Console.WriteLine(disco.Error);
+        return;
+    }
+
+    // request token
+    var tokenClient = new TokenClient(disco.TokenEndpoint, "client", "secret");
+    var tokenResponse = await tokenClient.RequestClientCredentialsAsync("api1");
+
+    if (tokenResponse.IsError)
+    {
+        Console.WriteLine(tokenResponse.Error);
+        return;
+    }
+
+    Console.WriteLine(tokenResponse.Json);
+
+    // call api
+    var client = new HttpClient();
+    client.SetBearerToken(tokenResponse.AccessToken);
+
+    var response = await client.GetAsync("http://localhost:5001/identity");
+    if (!response.IsSuccessStatusCode)
+    {
+        Console.WriteLine(response.StatusCode);
+    }
+    else
+    {
+        var content = await response.Content.ReadAsStringAsync();
+        Console.WriteLine(JArray.Parse(content));
+    }
+}
+```
