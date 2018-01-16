@@ -1,2 +1,7 @@
 # IdentitySample
-IdentitySample
+
+IdentitySample包含
+
+1_ClientCredentials
+2_ResourceOwnerPasswords
+3_ImplicitFlowAuthentication
