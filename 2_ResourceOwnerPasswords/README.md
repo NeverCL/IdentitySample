@@ -63,3 +63,5 @@ services.AddIdentityServer()
 
 `dotnet new web -n Api`
 `dotnet add package IdentityServer4.AccessTokenValidation --version 2.3.0`
+
+同上节
