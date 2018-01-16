@@ -142,3 +142,41 @@ private static async Task MainAsync()
     }
 }
 ```
+
+```json
+{
+  "access_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImRiMzdhNzIzNGMxYzM0ZmZlOTM2ZDlmYmJkYTk2NDkyIiwidHlwIjoiSldUIn0.eyJuYmYiOjE1MTYwOTM0OTIsImV4cCI6MTUxNjA5NzA5MiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo1MDAwIiwiYXVkIjpbImh0dHA6Ly9sb2NhbGhvc3Q6NTAwMC9yZXNvdXJjZXMiLCJhcGkxIl0sImNsaWVudF9pZCI6ImNsaWVudCIsInNjb3BlIjpbImFwaTEiXX0.Mdd3Wc82fZcwIEePq1WnTb_Pkhr0AUzER_iyF7cK7kOs-S_TJQR_ylR2HfiJE1u8nD3VetfcTT5GBvK4h-jlcJFpL2_4913jrkeKZeVjce4ka0u6qGJOIjN-kplnAdyM8HgD1_GKgEq2DI3A5rsUsPRW7bdv415fCR2jtL6MQhKm6eG2utF4CrVDTFW3tDtx7j7Ey5RcdFmdjClgXqUdQbTt94YwBnUDrr9s-VWJg8R_nilL58eIuJo9u6nABinesmdb9V--Hzg1j3IlujaFP9EA2N_6xrDS-DadzxQ2Q1rucSYGZV43hcv_HYe3WINEJWKAVeZxaz3MmIgtbP8cog",
+  "expires_in": 3600,
+  "token_type": "Bearer"
+}
+[
+  {
+    "type": "nbf",
+    "value": "1516093492"
+  },
+  {
+    "type": "exp",
+    "value": "1516097092"
+  },
+  {
+    "type": "iss",
+    "value": "http://localhost:5000"
+  },
+  {
+    "type": "aud",
+    "value": "http://localhost:5000/resources"
+  },
+  {
+    "type": "aud",
+    "value": "api1"
+  },
+  {
+    "type": "client_id",
+    "value": "client"
+  },
+  {
+    "type": "scope",
+    "value": "api1"
+  }
+]
+```
