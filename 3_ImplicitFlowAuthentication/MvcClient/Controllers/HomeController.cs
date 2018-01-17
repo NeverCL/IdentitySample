@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MvcClient.Models;
+using Newtonsoft.Json.Linq;
 
 namespace MvcClient.Controllers
 {
@@ -26,8 +27,8 @@ namespace MvcClient.Controllers
         [Authorize]
         public IActionResult Contact()
         {
-            ViewData["Message"] = "Your contact page.";
-
+            var data = from c in User.Claims select new { c.Type, c.Value };
+            ViewData["Message"] = Newtonsoft.Json.JsonConvert.SerializeObject(data);
             return View();
         }
 
