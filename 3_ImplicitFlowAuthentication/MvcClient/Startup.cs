@@ -37,6 +37,7 @@ namespace MvcClient
                 opt.RequireHttpsMetadata = false;
 
                 opt.ClientId = "mvc";
+                // opt.SaveTokens = true;
             });
         }
 
