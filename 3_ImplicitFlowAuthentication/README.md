@@ -6,6 +6,28 @@
 `dotnet add package IdentityServer4 --version 2.1.1`
 `iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/IdentityServer/IdentityServer4.Quickstart.UI/release/get.ps1'))`
 
+- 修改`Config.cs`
+
+```c#
+new Client
+{
+    ClientId = "mvc",
+    ClientName = "MVC Client",
+    AllowedGrantTypes = GrantTypes.Implicit,
+
+    RedirectUris = { "http://localhost:5002/signin-oidc" },
+    PostLogoutRedirectUris = { "http://localhost:5002/signout-callback-oidc" },
+
+    AllowedScopes =
+    {
+        IdentityServerConstants.StandardScopes.OpenId,
+        IdentityServerConstants.StandardScopes.Profile
+    }
+}
+```
+
+- 修改`Startup.cs`
+
 ```c#
 public void ConfigureServices(IServiceCollection services)
 {
