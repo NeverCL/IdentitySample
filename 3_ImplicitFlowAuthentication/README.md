@@ -24,6 +24,16 @@ new Client
         IdentityServerConstants.StandardScopes.Profile
     }
 }
+
+...
+public static IEnumerable<IdentityResource> GetIdentityResources()
+{
+    return new List<IdentityResource>
+    {
+        new IdentityResources.OpenId(),
+        new IdentityResources.Profile(),
+    };
+}
 ```
 
 - 修改`Startup.cs`
@@ -34,6 +44,7 @@ public void ConfigureServices(IServiceCollection services)
     services.AddMvc();
     services.AddIdentityServer()
         .AddDeveloperSigningCredential()
+        .AddInMemoryIdentityResources(Config.GetIdentityResources())    // 添加身份资源
         .AddInMemoryApiResources(Config.GetApiResources())
         .AddInMemoryClients(Config.GetClients())
         .AddTestUsers(Config.GetUsers());
@@ -49,3 +60,4 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 ```
 
 访问`http://localhost:5000`确认(Identity页面)
+
