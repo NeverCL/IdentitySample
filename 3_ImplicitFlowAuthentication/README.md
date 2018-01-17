@@ -61,3 +61,34 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 
 访问`http://localhost:5000`确认(Identity页面)
 
+## MvcClient
+
+`dotnet new mvc -n MvcClient`
+
+- 修改`Startup.cs`
+
+```c#
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddMvc();
+
+    services.AddAuthentication(opt =>
+    {
+        opt.DefaultScheme = "Cookie";// 未登录的时候 执行oidc的Challenge方法
+        opt.DefaultChallengeScheme = "oidc";
+    })
+    .AddCookie("Cookie")
+    .AddOpenIdConnect("oidc",opt=>
+    {
+        opt.SignInScheme = "Cookie";    // 所有远程登录都需要指定本地登录的方法
+
+        opt.Authority = "http://localhost:5000";
+        opt.RequireHttpsMetadata = false;
+
+        opt.ClientId = "mvc";
+    });
+}
+
+...
+app.UseAuthentication();
+```
