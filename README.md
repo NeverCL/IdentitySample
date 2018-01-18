@@ -5,3 +5,5 @@ IdentitySample包含
 1_ClientCredentials
 2_ResourceOwnerPasswords
 3_ImplicitFlowAuthentication
+4_ImplicitFlowAuthenticationWithExternal
+
