@@ -13,6 +13,14 @@ Client Credentials是IdentityServer中的最基本场景。
 
 ## ResourceOwnerPasswords
 
+ResourceOwnerPasswords授权client发送 username and password 到 token service 来获取代表用户的access token。
+该规范用于非常可信的 或旧的应用。
+
+注意：
+1. access_token的信息相比clientcredentials方式，多返回name为sub的claim标识用户的Id
+1. 声明的存在（或不存在）sub使API能够区分代表Client 或 User的请求
+
+问题：如果用户的Claims，默认不会传输到API端。
 
 
 2_ResourceOwnerPasswords

@@ -12,18 +12,18 @@ public static IEnumerable<Client> GetClients()
 {
     return new List<Client>
     {
-        ...
+        // other clients omitted...
+
+        // resource owner password grant client
         new Client
         {
             ClientId = "ro.client",
-            // no interactive user, use the clientid/secret for authentication
             AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
-            // secret for authentication
             ClientSecrets =
             {
                 new Secret("secret".Sha256())
             },
-            // scopes that client has access to
+            
             AllowedScopes = { "api1" }
         }
     };
@@ -76,12 +76,19 @@ var tokenClient = new TokenClient(disco.TokenEndpoint, "ro.client", "secret");
 var tokenResponse = await tokenClient.RequestResourceOwnerPasswordAsync("alice", "password", "api1");
 ```
 
+access_token
+
 ```json
 {
   "access_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImRiMzdhNzIzNGMxYzM0ZmZlOTM2ZDlmYmJkYTk2NDkyIiwidHlwIjoiSldUIn0.eyJuYmYiOjE1MTYwOTM0MzYsImV4cCI6MTUxNjA5NzAzNiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo1MDAwIiwiYXVkIjpbImh0dHA6Ly9sb2NhbGhvc3Q6NTAwMC9yZXNvdXJjZXMiLCJhcGkxIl0sImNsaWVudF9pZCI6InJvLmNsaWVudCIsInN1YiI6IjEiLCJhdXRoX3RpbWUiOjE1MTYwOTM0MzYsImlkcCI6ImxvY2FsIiwic2NvcGUiOlsiYXBpMSJdLCJhbXIiOlsicHdkIl19.EiOq3Oju29ARvt7IoetXSBLgudPoc-XO3Em29QHyKiDAHdIL-AYXawIQMwYC-at5vpawoKWe0cLSmHvFMPOv6bYuZArhzri4oEUfkcjfXvrNGqxmeRp7myMlqIcy4chKF5ezvNJPi2c5mo93ZUiw4hGxd7hiSbLOjKD5mH2LQvXCBcn6OQ3Fg4eG7Tgk6CvMyvser_UC3i9Otcrqeh2NaNcCykDYCY7bnmNuYuLUrv3fi2J2-3UhVHFBKoeaPnjJuNwVqgnLBgIdgiD4GT5AadWjCGZlWr9sO8rI3LP4I4uxr8rL22APd_72zn0vsOFPY0xnPDiNVhY5APqmCOfsIQ",
   "expires_in": 3600,
   "token_type": "Bearer"
 }
+```
+
+claims
+
+```json
 [
   {
     "type": "nbf",
@@ -128,4 +135,33 @@ var tokenResponse = await tokenClient.RequestResourceOwnerPasswordAsync("alice",
     "value": "pwd"
   }
 ]
+```
+
+jwt
+
+```json
+{
+  "alg": "RS256",
+  "kid": "db37a7234c1c34ffe936d9fbbda96492",
+  "typ": "JWT"
+}
+{
+  "nbf": 1516093436,
+  "exp": 1516097036,
+  "iss": "http://localhost:5000",
+  "aud": [
+    "http://localhost:5000/resources",
+    "api1"
+  ],
+  "client_id": "ro.client",
+  "sub": "1",
+  "auth_time": 1516093436,
+  "idp": "local",
+  "scope": [
+    "api1"
+  ],
+  "amr": [
+    "pwd"
+  ]
+}
 ```
