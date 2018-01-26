@@ -25,13 +25,13 @@ public static IEnumerable<Client> GetClients()
         new Client
         {
             ClientId = "client",
-            // no interactive user, use the clientid/secret for authentication
+            // 没有用户交互，使用clientid/secret来作认证
             AllowedGrantTypes = GrantTypes.ClientCredentials,
             ClientSecrets = // secret for authentication
             {
                 new Secret("secret".Sha256())
             },
-            AllowedScopes = { "api1" } // scopes that client has access to
+            AllowedScopes = { "api1" } // scopes 表示客户端可访问的作用域
         }
     };
 }
@@ -71,7 +71,8 @@ public void ConfigureServices(IServiceCollection services)
         .AddIdentityServerAuthentication(options=>{
             options.Authority = "http://localhost:5000";
             options.ApiName = "api1";
-            options.RequireHttpsMetadata = false;   // develop
+
+            options.RequireHttpsMetadata = false;   // develop下
         });
 }
 
@@ -142,6 +143,7 @@ private static async Task MainAsync()
     }
 }
 ```
+access_token
 
 ```json
 {
@@ -149,6 +151,11 @@ private static async Task MainAsync()
   "expires_in": 3600,
   "token_type": "Bearer"
 }
+```
+
+claims
+
+```json
 [
   {
     "type": "nbf",
@@ -179,4 +186,28 @@ private static async Task MainAsync()
     "value": "api1"
   }
 ]
+```
+
+jwt header and payload
+
+```json
+{
+  "alg": "RS256",
+  "kid": "db37a7234c1c34ffe936d9fbbda96492",
+  "typ": "JWT"
+}
+
+{
+  "nbf": 1516093492,
+  "exp": 1516097092,
+  "iss": "http://localhost:5000",
+  "aud": [
+    "http://localhost:5000/resources",
+    "api1"
+  ],
+  "client_id": "client",
+  "scope": [
+    "api1"
+  ]
+}
 ```
