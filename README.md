@@ -25,7 +25,12 @@ ResourceOwnerPasswords授权client发送 username and password 到 token service
 
 ## ImplicitFlowAuthentication
 
+Identity Server通过OpenID Connect协议为我们提供交互式用户认证。
 
+问题：
+1. Client定义中的RedirectUris和PostLogoutRedirectUris地址与API中的哪里对应？
+    - OpenIdConnectOptions中配置了CallbackPath和SignedOutCallbackPath与之对应
+1. SaveToken用于处理什么？
 
 
 4_ImplicitFlowAuthenticationWithExternal
