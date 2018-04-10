@@ -2,6 +2,8 @@
 
 IdentitySample
 
+参考[官方Doc](https://identityserver4.readthedocs.io/en/release/index.html)
+
 ## Basic
 
 dotnet new web -o Geek.IdentityServer4
@@ -21,11 +23,11 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 
 debug:
 
-`cd ./Geek.IdentityServer4 && dotnet watch run`
+`cd ./Geek.IdentityServer4 && dotnet restore && dotnet watch run`
 
-`cd ./Geek.Api && dotnet watch run`
+`cd ./Geek.Api && dotnet restore && dotnet watch run`
 
-`cd ./Geek.Client && dotnet watch run`
+`cd ./Geek.Client && dotnet restore && dotnet watch run`
 
 ### Protecting an API using Client Credentials
 

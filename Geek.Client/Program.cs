@@ -20,7 +20,7 @@ namespace Geek.Client
             token = await new TokenClient(disco.TokenEndpoint, "ro.client", "secret2").RequestResourceOwnerPasswordAsync("user1", "pwd1", "api1");
             var client = new HttpClient();
             client.SetBearerToken(token.AccessToken);
-            var content = await client.GetStringAsync("http://192.168.0.75:5001/api/value");
+            var content = await client.GetStringAsync("http://localhost:5001/api/value");
             System.Console.WriteLine(token.AccessToken);
             System.Console.WriteLine(content);
         }
