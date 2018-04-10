@@ -19,6 +19,14 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 }
 ```
 
+debug:
+
+`cd ./Geek.IdentityServer4 && dotnet watch run`
+
+`cd ./Geek.Api && dotnet watch run`
+
+`cd ./Geek.Client && dotnet watch run`
+
 ### Protecting an API using Client Credentials
 
 In this scenario we will define an API and a client that wants to access it. The client will request an access token at IdentityServer and use it to gain access to the API.
