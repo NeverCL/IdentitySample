@@ -29,6 +29,8 @@ debug:
 
 `cd ./Geek.Client && dotnet restore && dotnet watch run`
 
+`cd ./Geek.MvcClient && dotnet restore && dotnet watch run`
+
 ### Protecting an API using Client Credentials
 
 In this scenario we will define an API and a client that wants to access it. The client will request an access token at IdentityServer and use it to gain access to the API.
@@ -47,6 +49,10 @@ The presence (or absence) of the sub claim lets the API distinguish between call
 
 ### Adding User Authentication with OpenID Connect
 
+dotnet new web -o Geek.MvcClient && cd Geek.MvcClient && dotnet new page -n Index -o Pages -na Geek.MvcClient.Pages
+
 All the protocol support needed for OpenID Connect is already built into IdentityServer. You need to provide the necessary UI parts for login, logout, consent and error.
+
+`CallbackPath` = `RedirectUris`
 
 `iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/IdentityServer/IdentityServer4.Quickstart.UI/release/get.ps1'))`
