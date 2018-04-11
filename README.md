@@ -56,3 +56,17 @@ All the protocol support needed for OpenID Connect is already built into Identit
 `CallbackPath` = `RedirectUris`
 
 `iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/IdentityServer/IdentityServer4.Quickstart.UI/release/get.ps1'))`
+
+id_token固定为Jwt，所以无法revoke 或 实时更新
+AddOpenIdConnect默认的scope为openid,profile
+
+JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+As well, we’ve turned off the JWT claim type mapping to allow well-known claims (e.g. ‘sub’ and ‘idp’) to flow through unmolested:
+
+Claims
+    Profile:name + website
+
+Remember My Decision
+    Store In Memory
+
+User.Identity.Name or Other Claims?

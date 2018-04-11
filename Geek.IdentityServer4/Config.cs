@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Security.Claims;
 using IdentityServer4.Models;
 using IdentityServer4.Test;
 
@@ -17,6 +18,15 @@ namespace Geek.IdentityServer4
                     }
             };
         }
+
+        public static List<IdentityResource> GetIdentityResources()
+        {
+            return new List<IdentityResource>{
+                new IdentityResources.OpenId(),
+                new IdentityResources.Profile()
+            };
+        }
+
         public static List<Client> GetClients()
         {
             return new List<Client>
@@ -40,6 +50,15 @@ namespace Geek.IdentityServer4
                     AllowedScopes =  {"api1"},
                     AllowedGrantTypes ={ GrantType.ResourceOwnerPassword }
                 },
+                new Client{
+                    ClientId = "mvc.client",
+                    AllowedScopes = {"openid","profile"},
+
+                    RedirectUris = {"http://localhost:5002/signin-oidc"},
+                    PostLogoutRedirectUris = {"http://localhost:5002/"},
+
+                    AllowedGrantTypes = {GrantType.Implicit}
+                }
             };
         }
 
@@ -49,7 +68,13 @@ namespace Geek.IdentityServer4
                 new TestUser{
                     Username = "user1",
                     Password = "pwd1",
-                    SubjectId = "sub1"
+                    SubjectId = "sub1",
+                    Claims = {
+                        new Claim("name","小张"),
+                        new Claim("website","Geek"),
+                        new Claim("role","admin1"),
+                        new Claim(ClaimTypes.Role,"admin"),
+                    }
                 },
                 new TestUser{
                     Username = "user2",
