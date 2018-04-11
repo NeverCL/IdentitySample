@@ -70,3 +70,4 @@ Remember My Decision
     Store In Memory
 
 User.Identity.Name or Other Claims?
+    [Identity Resource](http://openid.net/specs/openid-connect-basic-1_0-28.html#scopes)
