@@ -21,6 +21,7 @@ namespace Geek.Api
                 {
                     options.Authority = "http://localhost:5000";
                     options.ApiName = "api1";
+                    options.ApiSecret = "sec1";
 
                     options.RequireHttpsMetadata = false;
                 });

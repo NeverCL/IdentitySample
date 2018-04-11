@@ -10,7 +10,11 @@ namespace Geek.IdentityServer4
         {
             return new List<ApiResource>
             {
-                    new ApiResource("api1")
+                    new ApiResource("api1"){
+                        ApiSecrets = {                  // for introspection
+                            new Secret("sec1".Sha256())
+                        }
+                    }
             };
         }
         public static List<Client> GetClients()
@@ -21,6 +25,13 @@ namespace Geek.IdentityServer4
                     ClientId = "client1",
                     ClientSecrets= { new Secret("secret1".Sha512()) },
                     AllowedScopes =  {"api1"},
+                    AllowedGrantTypes ={ GrantType.ClientCredentials }
+                },
+                new Client{
+                    ClientId = "re.client",
+                    ClientSecrets= { new Secret("secret".Sha512()) },
+                    AllowedScopes =  {"api1"},
+                    AccessTokenType = AccessTokenType.Reference,
                     AllowedGrantTypes ={ GrantType.ClientCredentials }
                 },
                 new Client{
