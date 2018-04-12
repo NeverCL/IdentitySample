@@ -71,3 +71,4 @@ Remember My Decision
 
 User.Identity.Name or Other Claims?
     [Identity Resource](http://openid.net/specs/openid-connect-basic-1_0-28.html#scopes)
+    在Implicit模式下，不可以获取oidc以外的claim
