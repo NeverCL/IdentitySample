@@ -22,7 +22,7 @@ namespace Geek.MvcClient
             services.AddAuthentication(opt =>
             {
                 opt.DefaultScheme = "Cookie";
-                opt.DefaultChallengeScheme = "oidc2";
+                opt.DefaultChallengeScheme = "hybrid-oidc";
             }).AddCookie("Cookie")
              .AddOpenIdConnect("oidc", opt =>
              {
@@ -37,14 +37,14 @@ namespace Geek.MvcClient
                  //  opt.ResponseType 默认为idtoken
                  //  opt.Scope.Add(""); // 默认openid,profile
              })
-            .AddOpenIdConnect("oidc2", opt =>
+            .AddOpenIdConnect("hybrid-oidc", opt =>
              {
                  opt.ClientId = "hybrid.client";
                  opt.ClientSecret = "secret";
                  opt.Authority = "http://localhost.:5000";
                  opt.RequireHttpsMetadata = false;
                  opt.SignInScheme = "Cookie";
-                 opt.CallbackPath = "/signin-oidc2";
+                 opt.CallbackPath = "/signin-hybrid-oidc";
                  opt.SaveTokens = true; // 默认为false，将token存储到cookie。便于后面直接获取
 
                  opt.GetClaimsFromUserInfoEndpoint = true;

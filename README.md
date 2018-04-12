@@ -93,3 +93,14 @@ HybridAndClientCredentials => ResponseType = "code id_token"
 
 Hybrid flow is a combination of the implicit and authorization code flow - it uses combinations of multiple grant types, most typically code id_token
     Hybrid = Implicit + Authorize Code
+
+## Endpoint
+
+http://localhost.:5000/connect/userinfo
+	通过idtoken获取IdentityResource
+
+http://localhost.:5000/connect/token
+	根据不同类型(authorization_code etc)获取id_token、access_token
+
+http://localhost.:5000/connect/endsession
+	参数：post_logout_redirect_uri+state申请在oidc上退出登录

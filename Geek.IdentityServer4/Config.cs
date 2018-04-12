@@ -68,10 +68,13 @@ namespace Geek.IdentityServer4
                     },
                     AllowedScopes = {"api1","openid","profile"},
 
+                    RequireConsent = true,         // 默认为true，需要用户许可Client
+
                     AllowRememberConsent = false, // 默认为true，在Memory中记住
                     AllowOfflineAccess = true,   // 默认为false,支持返回refresh_token
+                    // AllowAccessTokensViaBrowser = true, // 默认为false,允许access_token出现在浏览器中，而不是后端请求获取，需要搭配implicit
 
-                    RedirectUris = {"http://localhost:5002/signin-oidc2"},
+                    RedirectUris = {"http://localhost:5002/signin-hybrid-oidc"},
                     PostLogoutRedirectUris = {"http://localhost:5002/signout-callback-oidc2"},
 
                     AllowedGrantTypes = GrantTypes.HybridAndClientCredentials
