@@ -77,3 +77,4 @@ User.Identity.Name or Other Claims
     在Implicit模式下，不可以获取oidc以外的claim
 
 Logout?
+PostLogoutRedirectUris?
