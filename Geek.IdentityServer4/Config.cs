@@ -57,10 +57,25 @@ namespace Geek.IdentityServer4
                     AllowRememberConsent = false, // 默认为true，在Memory中记住
 
                     RedirectUris = {"http://localhost:5002/signin-oidc"},
-                    PostLogoutRedirectUris = {"http://localhost:5002/"},
+                    PostLogoutRedirectUris = {"http://localhost:5002/signout-callback-oidc"},
 
                     AllowedGrantTypes = {GrantType.Implicit}
-                }
+                },
+                new Client{
+                    ClientId = "hybrid.client",
+                    ClientSecrets = {
+                        new Secret("secret".Sha256())
+                    },
+                    AllowedScopes = {"api1","openid","profile"},
+
+                    AllowRememberConsent = false, // 默认为true，在Memory中记住
+                    AllowOfflineAccess = true,   // 默认为false,支持返回refresh_token
+
+                    RedirectUris = {"http://localhost:5002/signin-oidc2"},
+                    PostLogoutRedirectUris = {"http://localhost:5002/signout-callback-oidc2"},
+
+                    AllowedGrantTypes = GrantTypes.HybridAndClientCredentials
+                },
             };
         }
 

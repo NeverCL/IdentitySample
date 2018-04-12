@@ -16,24 +16,41 @@ namespace Geek.MvcClient
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear(); // 关闭jwt到默认scheme的映射
             services.AddMvc();
 
             services.AddAuthentication(opt =>
             {
                 opt.DefaultScheme = "Cookie";
-                opt.DefaultChallengeScheme = "oidc";
+                opt.DefaultChallengeScheme = "oidc2";
             }).AddCookie("Cookie")
-            .AddOpenIdConnect("oidc", opt =>
+             .AddOpenIdConnect("oidc", opt =>
              {
                  opt.ClientId = "mvc.client";
                  opt.Authority = "http://localhost.:5000";
                  opt.RequireHttpsMetadata = false;
                  opt.SignInScheme = "Cookie";
+                //  opt.CallbackPath = "/signin-oidc"; // 默认该值
+                //  opt.SignedOutCallbackPath = "/signout-callback-oidc";  // 默认该值
 
-                 //  opt.GetClaimsFromUserInfoEndpoint = true; // 获取更全的Claims
+                 //  opt.GetClaimsFromUserInfoEndpoint = true; // 请求userinfo获取IdentityResource
                  //  opt.ResponseType 默认为idtoken
                  //  opt.Scope.Add(""); // 默认openid,profile
+             })
+            .AddOpenIdConnect("oidc2", opt =>
+             {
+                 opt.ClientId = "hybrid.client";
+                 opt.ClientSecret = "secret";
+                 opt.Authority = "http://localhost.:5000";
+                 opt.RequireHttpsMetadata = false;
+                 opt.SignInScheme = "Cookie";
+                 opt.CallbackPath = "/signin-oidc2";
+                 opt.SaveTokens = true; // 默认为false，将token存储到cookie。便于后面直接获取
+
+                 opt.GetClaimsFromUserInfoEndpoint = true;
+                 opt.ResponseType = "code id_token";
+                 opt.Scope.Add("api1");
+                 opt.Scope.Add("offline_access");   // 用于获取refresh token
              });
         }
 

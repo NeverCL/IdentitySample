@@ -19,7 +19,7 @@ namespace Geek.Api
             services.AddAuthentication("Bearer")  // AddIdentityServerAuthentication 默认注册Bearer
                 .AddIdentityServerAuthentication(options =>
                 {
-                    options.Authority = "http://localhost:5000";
+                    options.Authority = "http://localhost.:5000";
                     options.ApiName = "api1";
                     options.ApiSecret = "sec1";
 

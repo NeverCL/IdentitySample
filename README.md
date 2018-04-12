@@ -78,3 +78,15 @@ User.Identity.Name or Other Claims
 
 Logout?
 PostLogoutRedirectUris?
+
+### Switching to Hybrid Flow and adding API Access back
+
+In the previous quickstarts we explored both API access and user authentication. Now we want to bring the two parts together.
+
+Access tokens are a bit more sensitive than identity tokens
+
+OpenID Connect includes a flow called “Hybrid Flow” which gives us the best of both worlds：
+    the identity token is transmitted via the browser channel
+    the client opens a back-channel to the token service to retrieve the access token
+
+HybridAndClientCredentials => ResponseType = "code id_token"
