@@ -63,12 +63,17 @@ AddOpenIdConnect默认的scope为openid,profile
 JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 As well, we’ve turned off the JWT claim type mapping to allow well-known claims (e.g. ‘sub’ and ‘idp’) to flow through unmolested:
 
+ResponseType
+    idtoken
+
 Claims
     Profile:name + website
 
 Remember My Decision
     Store In Memory
 
-User.Identity.Name or Other Claims?
+User.Identity.Name or Other Claims
     [Identity Resource](http://openid.net/specs/openid-connect-basic-1_0-28.html#scopes)
     在Implicit模式下，不可以获取oidc以外的claim
+
+Logout?

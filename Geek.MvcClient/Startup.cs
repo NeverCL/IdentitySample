@@ -31,9 +31,9 @@ namespace Geek.MvcClient
                  opt.RequireHttpsMetadata = false;
                  opt.SignInScheme = "Cookie";
 
-                //  opt.GetClaimsFromUserInfoEndpoint = true; // 获取更全的Claims
-
-                //  opt.Scope.Add(""); // 默认openid,profile
+                 //  opt.GetClaimsFromUserInfoEndpoint = true; // 获取更全的Claims
+                 //  opt.ResponseType 默认为idtoken
+                 //  opt.Scope.Add(""); // 默认openid,profile
              });
         }
 

@@ -54,6 +54,8 @@ namespace Geek.IdentityServer4
                     ClientId = "mvc.client",
                     AllowedScopes = {"openid","profile"},
 
+                    AllowRememberConsent = false, // 默认为true，在Memory中记住
+
                     RedirectUris = {"http://localhost:5002/signin-oidc"},
                     PostLogoutRedirectUris = {"http://localhost:5002/"},
 
