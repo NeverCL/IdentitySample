@@ -22,7 +22,7 @@ namespace Geek.MvcClient
             services.AddAuthentication(opt =>
             {
                 opt.DefaultScheme = "Cookie";
-                opt.DefaultChallengeScheme = "hybrid-oidc";
+                opt.DefaultChallengeScheme = "implicit-oidc";
             }).AddCookie("Cookie")
              .AddOpenIdConnect("oidc", opt =>
              {
@@ -49,6 +49,21 @@ namespace Geek.MvcClient
 
                  opt.GetClaimsFromUserInfoEndpoint = true;
                  opt.ResponseType = "code id_token";
+                 opt.Scope.Add("api1");
+                 opt.Scope.Add("offline_access");   // 用于获取refresh token
+             })
+             .AddOpenIdConnect("implicit-oidc", opt =>
+             {
+                 opt.ClientId = "implicit.client";
+                 opt.ClientSecret = "secret";
+                 opt.Authority = "http://localhost.:5000";
+                 opt.RequireHttpsMetadata = false;
+                 opt.SignInScheme = "Cookie";
+                 opt.CallbackPath = "/signin-implicit-oidc";
+                 opt.SaveTokens = true; // 默认为false，将token存储到cookie。便于后面直接获取
+
+                 opt.GetClaimsFromUserInfoEndpoint = true;
+                 opt.ResponseType = "token id_token";
                  opt.Scope.Add("api1");
                  opt.Scope.Add("offline_access");   // 用于获取refresh token
              });
