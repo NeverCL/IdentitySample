@@ -90,3 +90,6 @@ OpenID Connect includes a flow called “Hybrid Flow” which gives us the best 
     the client opens a back-channel to the token service to retrieve the access token
 
 HybridAndClientCredentials => ResponseType = "code id_token"
+
+Hybrid flow is a combination of the implicit and authorization code flow - it uses combinations of multiple grant types, most typically code id_token
+    Hybrid = Implicit + Authorize Code
