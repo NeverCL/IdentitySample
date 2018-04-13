@@ -96,18 +96,18 @@ Hybrid flow is a combination of the implicit and authorization code flow - it us
 
 ## Endpoint
 
-http://localhost.:5000/connect/userinfo
-	通过idtoken获取IdentityResource
+[userinfo](http://localhost.:5000/connect/userinfo)
+    通过idtoken获取IdentityResource
 
-http://localhost.:5000/connect/token
-	根据不同类型(authorization_code etc)获取id_token、access_token
+[token](http://localhost.:5000/connect/token)
+    根据不同类型(authorization_code etc)获取id_token、access_token
 
-http://localhost.:5000/connect/endsession
-	参数：post_logout_redirect_uri+state申请在oidc上退出登录
+[endsession](http://localhost.:5000/connect/endsession)
+    参数：post_logout_redirect_uri+state申请在oidc上退出登录
 
 JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
     关闭jwt到默认scheme的映射
-    如：role -> http://schemas.microsoft.com/ws/2008/06/identity/claims/role
+    如：`role -> http://schemas.microsoft.com/ws/2008/06/identity/claims/role`
 
 opt.GetClaimsFromUserInfoEndpoint = true; // 请求userinfo获取IdentityResource
     从UserInfoEndpoint再获取一次Claims，虽然能获取，但是在Client上并不会自动重新赋值
