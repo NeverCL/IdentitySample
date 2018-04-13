@@ -4,13 +4,16 @@
 @{
     <h1>Page-Index</h1>
     <div>Name: @User.Identity.Name </div>
+    <div>Claims Count: @User.Claims.Count()</div>
     foreach (var claim in User.Claims)
     {
         <div>@claim.Type</div>
         <div>@claim.Value</div>
         <br/>
     }
-    <div>Access_Token: @await ViewContext.HttpContext.GetTokenAsync("access_token") </div>
+    <div>Access_Token: @await HttpContext.GetTokenAsync("access_token") </div>
+    <div>refresh_token: @await HttpContext.GetTokenAsync("refresh_token") </div>
+    <div>id_token: @await HttpContext.GetTokenAsync("id_token") </div>
     <a href="logout">logout</a>
 }
 

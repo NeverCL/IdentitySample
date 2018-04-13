@@ -104,3 +104,13 @@ http://localhost.:5000/connect/token
 
 http://localhost.:5000/connect/endsession
 	参数：post_logout_redirect_uri+state申请在oidc上退出登录
+
+JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+    关闭jwt到默认scheme的映射
+    如：role -> http://schemas.microsoft.com/ws/2008/06/identity/claims/role
+
+opt.GetClaimsFromUserInfoEndpoint = true; // 请求userinfo获取IdentityResource
+    从UserInfoEndpoint再获取一次Claims，虽然能获取，但是在Client上并不会自动重新赋值
+
+AlwaysIncludeUserClaimsInIdToken = true,  // 默认为false,
+    在返回id_token的时候，将其他非oidc标准的 且 用户许可的Claims 一起返回给Client
